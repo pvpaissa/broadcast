@@ -1,0 +1,12 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created tables for cleanse_broadcast_'
+    - add_broadcast_tables.php
+1.0.3:
+    - 'Added a table to show casters.'
+    - add_broadcast_caster_tables.php
+1.1.0:
+    - 'Added support for custom events / tourneys (alpha).'
+    - 'Added custom events tables.'
+    - add_broadcast_custom_events_tables.php
