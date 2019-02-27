@@ -5,9 +5,9 @@ namespace Cleanse\Broadcast\Models;
 use Model;
 
 /**
- * @property integer $id
- * @property integer $team_id
- * @property string  $name
+ * @property integer id
+ * @property integer team_id
+ * @property string  name
  */
 class Player extends Model
 {
