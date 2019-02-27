@@ -13,8 +13,10 @@ class AddBroadcastCustomEventsTables extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('event_id')->nullable();
             $table->string('name');
             $table->string('initials')->nullable();
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
 
