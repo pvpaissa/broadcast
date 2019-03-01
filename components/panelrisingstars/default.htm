@@ -1,0 +1,118 @@
+<div id="broadcastEvent" class="container-fluid pb-3">
+    <h1 class="text-white">{{ event.name }}</h1>
+    <p class="lead text-rs-primary">{{ event.event_datetime|date("F jS \\a\\t g:ia") }}</p>
+
+    <div class="row mb-3 text-white">
+        <div class="col-md-6 castersForm">
+            {{ form_open({ request: __SELF__~'::onCasterUpdate' }) }}
+            <div class="form-group">
+                <label for="casters">Update Shoutcasters</label>
+                <input type="text" class="form-control" name="casters" value="{{ casters }}">
+            </div>
+
+            <button type="submit" class="btn btn-block btn-danger">
+                Update Shoutcasters
+            </button>
+            {{ form_close() }}
+        </div>
+        <div class="col-md-6 castersLive">
+            <h3 class="text-primary">Live Casters</h3>
+            <p class="text-rs-primary">{{ casters }}</p>
+        </div>
+    </div>
+
+    <nav>
+        <div id="nav-tab" class="nav nav-tabs" role="tablist">
+            <a id="nav-home-tab" class="nav-item nav-link active" href="#nav-home"
+               data-toggle="tab" role="tab" aria-controls="nav-home" aria-selected="true">Matches</a>
+            <a id="nav-profile-tab" class="nav-item nav-link" data-toggle="tab" href="#nav-profile" role="tab"
+               aria-controls="nav-profile" aria-selected="false">Reorder</a>
+        </div>
+    </nav>
+    <div id="nav-tabContent" class="tab-content bg-nocap text-white p-3">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div id="broadcastMatches">
+                {% for m in event.matches %}
+                <div class="eventMatchWrapper mb-2 p-2
+                {% if event.active_match == m.id %} activeMatch{% else %} inactiveMatch text-muted{% endif %}">
+                    {{ form_open({ request: __SELF__~'::onUpdateScore' }) }}
+                    <input type="hidden" name="eventId" value="{{ event.id }}">
+                    <input type="hidden" name="matchId" value="{{ m.id }}">
+                    <div id="{{ m.id }}" class="row mb-3">
+                        <div class="col-3 text-left clawsPoints">
+                            <div class="form-group">
+                                <label for="claws_score" class="sr-only">Claws Score</label>
+                                <input type="number" id="claws_score" name="claws_score" class="form-control"
+                                       value="{{ m.claws_score ?? 0 }}">
+                            </div>
+                        </div>
+                        <div class="col-3 text-left clawsName">
+                            <p class="d-none d-sm-block">{{ m.claws.name }}</p>
+                            <p class="d-sm-none d-xs-block">{{ m.claws.initials }}</p>
+                        </div>
+                        <div class="col-3 text-right fangsName">
+                            <p class="d-none d-sm-block">{{ m.fangs.name }}</p>
+                            <p class="d-sm-none d-xs-block">{{ m.fangs.initials }}</p>
+                        </div>
+                        <div class="col-3 text-right fangsPoints">
+                            <div class="form-group">
+                                <label for="fangs_score" class="sr-only">Fangs Score</label>
+                                <input type="number" id="fangs_score" name="fangs_score" class="form-control"
+                                       value="{{ m.fangs_score ?? 0 }}">
+                            </div>
+                        </div>
+                    </div>
+                    {% if event.active_match == m.id %}
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Update Score
+                    </button>
+                    {{ form_close() }}
+
+                    {{ form_open({ request: __SELF__~'::onCompleteMatch' }) }}
+                    <input type="hidden" name="matchId" value="{{ m.id }}">
+                    <button type="submit" class="btn btn-info btn-block">
+                        Finalize {{ m.claws.name }} vs {{ m.fangs.name }}
+                    </button>
+                    {{ form_close() }}
+                    {% endif %}
+
+                    {% if event.active_match != m.id %}
+                    {{ form_open({ request: __SELF__~'::onSetActiveMatch' }) }}
+                    <input type="hidden" name="eventId" value="{{ event.id }}">
+                    <input type="hidden" name="matchId" value="{{ m.id }}">
+                    <button type="submit" class="btn btn-outline-primary btn-block">
+                        Activate {{ m.claws.name }} vs {{ m.fangs.name }}
+                    </button>
+                    {{ form_close() }}
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="matchOrder">
+                <p class="lead">In-case you need to reorder the matches, 1 is first, 2 is second, etc.</p>
+                {{ form_open({ request: __SELF__~'::onMatchOrder' }) }}
+                {% for o in event.matches %}
+                <div class="form-group">
+                    <label for="match[{{ o.id }}][]">{{ o.claws.name }} vs {{ o.fangs.name }}</label>
+                    <input type="number" id="match[{{ o.id }}][]" name="match[{{ o.id }}][]" class="form-control"
+                           value="{{ o.order }}">
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-outline-primary btn-block">
+                    Reorder Matches
+                </button>
+                {{ form_close() }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+- 1. Event buttons below can add an "id" & change the "update X" button.
+- 2. Update & push scores.
+- 3. Activate next match feature.
+- 4. Fancy 'reorder' can be done last.
+-->

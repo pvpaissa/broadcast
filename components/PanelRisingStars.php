@@ -64,7 +64,7 @@ class PanelRisingStars extends ComponentBase
         $update = new StageUpdater();
         $update->updateMatch(post('matchId'));
 
-        return Redirect::to('/broadcast/panel/rising-stars/' . post('eventId'));
+        return Redirect::to('/broadcast/panel/rising-stars/' . post('eventId') . '#' . post('matchId'));
     }
 
     public function onSetActiveMatch()
@@ -73,7 +73,7 @@ class PanelRisingStars extends ComponentBase
         $event->active_match = post('matchId');
         $event->save();
 
-        return Redirect::to('/broadcast/panel/rising-stars/' . post('eventId'));
+        return Redirect::to('/broadcast/panel/rising-stars/' . post('eventId') . '#' . post('matchId'));
     }
 
     /**
