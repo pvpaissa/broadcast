@@ -22,13 +22,13 @@ class Event extends Model
     public $hasMany = [
         'matches' => [
             'Cleanse\Broadcast\Models\Match',
-            'key' => 'id',
-            'otherKey' => 'event_id'
+            'key' => 'event_id',
+            'otherKey' => 'id'
         ],
         'teams' => [
             'Cleanse\Broadcast\Models\Team',
-            'key' => 'id',
-            'otherKey' => 'event_id'
+            'key' => 'event_id',
+            'otherKey' => 'id'
         ]
     ];
 }

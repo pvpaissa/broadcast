@@ -1,0 +1,26 @@
+{% if match %}
+<div id="rising-stars-scoreboard" class="tourneyScoreboardWrapper">
+    <div class="scoreWrapper">
+        <div class="clawsWrapper">
+            <div id="clawsLogo" class="defaultClaws clawsLogo"></div>
+            <h2 id="claws" class="clawsName">{{ match.claws.name ?? 'Claws' }}</h2>
+            <p id="claws_score" class="clawsScore">{{ match.claws_score ?? 0 }}</p>
+        </div>
+        <div class="fangsWrapper">
+            <p id="fangs_score" class="fangsScore">{{ match.fangs_score ?? 0 }}</p>
+            <h2 id="fangs" class="fangsName">{{ match.fangs.name ?? 'Fangs' }}</h2>
+            <div id="fangsLogo" class="defaultFangs fangsLogo"></div>
+        </div>
+    </div>
+    <div class="miscWrapper">
+        <h3 id="casters" class="shoutcastWrapper">
+            <span class="upNext">Casting by:</span> <span id="rising-stars-casters">Eternal</span>
+        </h3>
+        <h3 class="upNextWrapper">
+            <span class="upNext">Game </span> <span id="rising-stars-casters-match-name">1</span>
+        </h3>
+    </div>
+</div>
+{% else %}
+<h1>NO MATCHES</h1>
+{% endif %}

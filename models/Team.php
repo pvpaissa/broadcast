@@ -9,6 +9,7 @@ use Model;
  * @property string  name
  * @property string  initials
  * @property integer points
+ * @property integer qualified
  */
 class Team extends Model
 {

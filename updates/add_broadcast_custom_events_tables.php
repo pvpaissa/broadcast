@@ -17,6 +17,7 @@ class AddBroadcastCustomEventsTables extends Migration
             $table->string('name');
             $table->string('initials')->nullable();
             $table->integer('points')->default(0);
+            $table->integer('qualified')->nullable();
             $table->timestamps();
         });
 

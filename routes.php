@@ -66,8 +66,26 @@ Route::get('/api/broadcast/rising/stages', function () {
         ->take(3)
         ->get();
 
+    $activeMatch = $event->matches->where('id', '=', $event->active_match)->first();
+
     return Response::json([
         'event' => $event,
-        'points' => $points
+        'points' => $points,
+        'highlight' => $activeMatch
     ]);
+});
+
+Route::get('/api/broadcast/rising/scoreboard', function () {
+    $id = Event::orderBy('id', 'desc')
+        ->first()->active_match;
+
+    $match = Match::with(['claws', 'fangs'])
+        ->where([
+            'id' => $id
+        ])
+        ->first();
+
+    $casters = BroadcastCasters::find(1);
+
+    return Response::json(['match' => $match, 'casters' => $casters->names]);
 });

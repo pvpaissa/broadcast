@@ -1,0 +1,200 @@
+$black: #131313;
+$white: #fff;
+
+$primary: #F26722;
+$secondary: #4DB6AC;
+$claws: #395788;
+$fangs: #C1615C;
+
+body {
+  background-color: rgba(0, 0, 0, 0);
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.5rem;
+}
+
+.text-rs-primary {
+  color: $primary;
+}
+
+.text-rs-secondary {
+  color: $secondary;
+}
+
+#broadcastEvent {
+  margin-top: 85px;
+}
+
+#rising-stars {
+  color: $white;
+
+  .highlight-padding {
+    padding-top: 95px;
+  }
+
+  .pvpaissa-branding {
+    background: url(/plugins/cleanse/broadcast/assets/images/pvpaissa.png) no-repeat bottom center;
+  }
+
+  .complete {
+    opacity: .69;
+  }
+
+  .stage-1,
+  .stage-2,
+  .stage-3 {
+    padding-top: 1rem;
+    background: linear-gradient(to top, rgba($black, 0) 0%, rgba($black, .33) 50%);
+    border-top: 3px solid $primary;
+  }
+
+  .stage-match {
+    padding: .5rem .33rem;
+    background: linear-gradient(to right, rgba($claws, .33) 0%, rgba($fangs, .33) 100%);
+    font-size: 2rem;
+
+    &.active {
+      border: 1px solid $white;
+    }
+
+    .claws .score {
+      display: inline-block;
+      margin-right: 1rem;
+      background: rgba($black, .33);
+      border-right: 1px solid $claws;
+    }
+
+    .fangs .score {
+      display: inline-block;
+      margin-left: 1rem;
+      background: rgba($black, .33);
+      border-left: 1px solid $fangs;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .score {
+      padding: 0 .69rem;
+    }
+  }
+
+  .team-standings {
+    padding: 0 2rem 0 0;
+    font-size: 1.33rem;
+
+    > div {
+      margin-bottom: .33rem;
+      padding: .5rem .33rem;
+      background: linear-gradient(to right, rgba($secondary, .33) 0%, rgba($secondary, .69) 100%);
+    }
+
+    .team {
+      font-weight: bold;
+    }
+
+    .points {
+      display: inline-block;
+      margin-left: 1rem;
+      padding: 0 .69rem;
+      background: rgba($black, .33);
+      border-left: 1px solid $secondary;
+    }
+  }
+}
+
+/* Start Tourney Scoreboard */
+.tourneyScoreboardWrapper {
+  width: 1600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  --borderWidth: 5px;
+  position: relative;
+  color: $white;
+  font-family: 'Oxygen', sans-serif;
+
+  .scoreWrapper, .miscWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .clawsWrapper, .fangsWrapper {
+    display: flex;
+    height: 65px;
+  }
+
+  .clawsWrapper {
+    background: #395788;
+  }
+
+  .fangsWrapper {
+    background: #C1615C;
+  }
+
+  .defaultClaws {
+    background-image: url("/plugins/cleanse/broadcast/assets/images/claws.png");
+  }
+
+  .defaultFangs {
+    background-image: url("/plugins/cleanse/broadcast/assets/images/fangs.png");
+  }
+
+  .clawsLogo, .fangsLogo {
+    width: 65px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .clawsLogo {
+    background-position: center;
+  }
+
+  .fangsLogo {
+    background-position: center;
+  }
+
+  .clawsName, .fangsName {
+    width: 570px;
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  .clawsName {
+    background: linear-gradient(rgba(57, 87, 136, 0.9), rgba(57, 87, 136, 0.6)),
+    url(../images/score-bg.jpeg) top left no-repeat;
+  }
+
+  .fangsName {
+    background: linear-gradient(rgba(193, 97, 92, 0.9), rgba(193, 97, 92, 0.6)),
+    url(../images/score-bg.jpeg) 0 -100%;
+  }
+
+  .clawsScore, .fangsScore {
+    width: 165px;
+    margin: auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .miscWrapper {
+    justify-content: space-between;
+    padding: 0 .75rem;
+    background: url("/plugins/cleanse/broadcast/assets/images/rising-stars-logo.png") rgba(0, 0, 0, .9) no-repeat center center;
+    -webkit-background-size: contain;
+    background-size: contain;
+  }
+
+  .shoutcastWrapper, .upNextWrapper {
+    margin: 0;
+    padding: .25rem 0;
+    color: #fff;
+    font-size: 16px;
+  }
+}
+/* End Scoreboard */

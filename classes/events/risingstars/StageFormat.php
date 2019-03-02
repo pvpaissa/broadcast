@@ -2,10 +2,10 @@
 
 namespace Cleanse\Broadcast\Classes\Events\RisingStars;
 
-use Cleanse\Broadcast\Models\Team;
 use October\Rain\Support\Collection;
 
 use Cleanse\Broadcast\Models\Match;
+use Cleanse\Broadcast\Models\Team;
 
 class StageFormat
 {
